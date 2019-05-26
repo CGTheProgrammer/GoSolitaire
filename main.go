@@ -3,7 +3,7 @@ package main
 import "fmt"
 import "strconv"
 
-func checkSuit(suit int) string {
+func initSuit(suit int) string {
 	switch s := suit; s {
 	case 1:
 		//clubs
@@ -22,7 +22,7 @@ func checkSuit(suit int) string {
 	}
 }
 
-func checkRoyal(j int) string {
+func initRoyal(j int) string {
 	switch r := j; r {
 	case 1:
 		return "A"
@@ -44,7 +44,7 @@ func main() {
 	deck[0] = "deck:\n"
 
 	for i = 1; i <= 52; i++ {
-		deck[i] = checkSuit(suit) + checkRoyal(j)
+		deck[i] = initSuit(suit) + initRoyal(j)
 		if j == 13 {
 			j = 1
 			suit++
