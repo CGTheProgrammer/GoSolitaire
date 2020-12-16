@@ -1,53 +1,44 @@
+package deck
+
+import "math/rand"
+
+// Deck = array of Cards
 type Deck struct {
-
-  var deck [53]string
-	var i int
-	var j, suit = 1, 1
-	deck[0] = "deck:\n"
-
-	for i = 1; i <= 52; i++ {
-		deck[i] = initSuit(suit) + initRoyal(j)
-		if j == 13 {
-			j = 1
-			suit++
-			println(suit)
-		} else {
-			j++
-		}
-	}
-
-  func initSuit(suit int) string {
-  	switch s := suit; s {
-  	case 1:
-  		//clubs
-  		return "rD_"
-  	case 2:
-  		//diamonds
-  		return "bC_"
-  	case 3:
-  		//hearts
-  		return "rH_"
-  	case 4:
-  		//spades
-  		return "bS_"
-  	default:
-  		return "error"
-  	}
+  Cards []Card
   }
 
-  func initRoyal(j int) string {
-  	switch r := j; r {
-  	case 1:
-  		return "A"
-  	case 11:
-  		return "J"
-  	case 12:
-  		return "Q"
-  	case 13:
-  		return "K"
-  	default:
-  		return strconv.Itoa(j)
-  	}
+// stacks function as decks without the cards being defined
+func NewStack() *Deck {
+  stack := Deck{}
+  return &stack
+}
+
+// creates new Deck type of standard 52 playing cards
+func NewDeck() *Deck {
+  deck := Deck{}
+  suits := []string{"spades,", "hearts", "diamonds", "clubs"}
+  numbers := []int{1,2,3,4,5,6,7,8,9,10,11,12,13}
+
+  for _, suit := range suits {
+    for _, number := range numbers {
+      deck.Cards = append(deck.Cards, Card{Suit:suit, Number:number})
+    }
   }
 
+  return &deck
+}
+
+// randomizes order of Cards in Deck
+//   by swapping one Card's position with another for each card place x10
+func ShuffleDeck(deck *Deck) *Deck{
+  cards := deck.Cards
+
+  for z := 1; z <=10; z++ {
+    for i := range cards {
+      j := rand.Intn(i + 1)
+      cards[i], cards[j] = cards[j], cards[i]
+    }
+  }
+
+  return deck
 }
