@@ -21,7 +21,7 @@ func NewDeck() *Deck {
 
   for _, suit := range suits {
     for _, number := range numbers {
-      deck.Cards = append(deck.Cards, Card{Suit:suit, Number:number})
+      deck.Cards = append(deck.Cards, Card{Suit:suit, Number:number, Facing:false})
     }
   }
 

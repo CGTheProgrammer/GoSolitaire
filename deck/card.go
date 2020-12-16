@@ -4,6 +4,7 @@ package deck
 type Card struct {
   Suit string
   Number int
+  Facing bool
 }
 
 // creates new card type
